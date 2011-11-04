@@ -61,6 +61,7 @@ user may look at the tclldoc class.
 #- source
 %doc %{_texmfdistdir}/source/latex/rtkinenc/rtkinenc.dtx
 %doc %{_texmfdistdir}/source/latex/rtkinenc/rtkinenc.ins
+%doc %{_tlpkgobjdir}/*.tlpobj
 
 #-----------------------------------------------------------------------
 %prep
@@ -71,3 +72,5 @@ user may look at the tclldoc class.
 %install
 mkdir -p %{buildroot}%{_texmfdistdir}
 cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
+mkdir -p %{buildroot}%{_tlpkgobjdir}
+cp -fpa tlpkg/tlpobj/*.tlpobj %{buildroot}%{_tlpkgobjdir}
