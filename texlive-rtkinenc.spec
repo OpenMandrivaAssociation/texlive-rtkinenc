@@ -1,6 +1,6 @@
 Name:		texlive-rtkinenc
 Version:	20003
-Release:	1
+Release:	2
 Summary:	Input encoding with fallback procedures
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/rtkinenc
