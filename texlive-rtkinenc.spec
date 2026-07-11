@@ -1,58 +1,31 @@
-Name:		texlive-rtkinenc
-Version:	20003
-Release:	2
+%global tl_name rtkinenc
+%global tl_revision 79618
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.0
+Release:	%{tl_revision}.1
 Summary:	Input encoding with fallback procedures
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/rtkinenc
-License:	LPPL
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/rtkinenc.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/rtkinenc.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/rtkinenc.source.r%{version}.tar.xz
+License:	lppl1.2
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/rtkinenc.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/rtkinenc.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/rtkinenc.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The rtkinenc package is functionally similar to the standard
-LaTeX package inputenc: both set up active characters so that
-an input character outside the range of 7-bit visible ASCII is
-coverted into one or more corresponding LaTeX commands. The
-main difference lies in that rtkinenc allows the user to
-specify a fallback procedure to use when the text command
-corresponding to some input character isn't available. Names of
-commands in rtkinenc have been selected so that it can read
-inputenc encoding definition files, and the aim is that
-rtkinenc should be backwards compatible with inputenc. rtkinenc
-is not a new version of inputenc though, nor is it part of
-standard LaTeX. For an example of how rtkinenc is used, the
-user may look at the tclldoc class.
+The rtkinenc package is functionally similar to the standard LaTeX
+package inputenc: both set up active characters so that an input
+character outside the range of 7-bit visible ASCII is converted into one
+or more corresponding LaTeX commands. The main difference lies in that
+rtkinenc allows the user to specify a fallback procedure to use when the
+text command corresponding to some input character isn't available.
+Names of commands in rtkinenc have been selected so that it can read
+inputenc encoding definition files, and the aim is that rtkinenc should
+be backwards compatible with inputenc. rtkinenc is not a new version of
+inputenc though, nor is it part of standard LaTeX. For an example of how
+rtkinenc is used, the user may look at the tclldoc class.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/rtkinenc/rtkinenc.sty
-%doc %{_texmfdistdir}/doc/latex/rtkinenc/README.txt
-%doc %{_texmfdistdir}/doc/latex/rtkinenc/rtkinenc-doc.pdf
-%doc %{_texmfdistdir}/doc/latex/rtkinenc/rtkinenc-doc.tex
-#- source
-%doc %{_texmfdistdir}/source/latex/rtkinenc/rtkinenc.dtx
-%doc %{_texmfdistdir}/source/latex/rtkinenc/rtkinenc.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
